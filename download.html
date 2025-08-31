@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Download Solari</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Montserrat', sans-serif; background:#0a0a0a; color:#fff; text-align:center; min-height:100vh; display:flex; justify-content:center; align-items:center; flex-direction:column; }
+h1 { font-size:3rem; color:#FFD700; text-shadow:0 0 10px #FFD700; margin-bottom:20px; }
+p { color:#ccc; margin-bottom:30px; }
+.btn { padding:15px 50px; border-radius:10px; background:#FFD700; color:#000; font-weight:bold; font-size:1.2rem; text-decoration:none; display:inline-block; box-shadow:0 0 5px #FFD700; }
+.btn:hover { background:#FFC700; box-shadow:0 0 15px #FFD700; }
+
+/* Particles */
+.particle { position:absolute; width:6px; height:6px; background:#FFD700; border-radius:50%; opacity:0.5; animation: float 12s linear infinite; z-index:0; }
+@keyframes float { 0% { transform: translateY(0) translateX(0); } 50% { transform: translateY(-200px) translateX(50px); } 100% { transform: translateY(0) translateX(-50px); } }
+</style>
+</head>
+<body>
+
+<h1>Download Solari</h1>
+<p id="statusMessage">Checking login status...</p>
+<a id="downloadBtn" class="btn" href="PLACEHOLDER FILE" style="display:none;">Download Now</a>
+
+<!-- Particles -->
+<div class="particle" style="top:10%; left:5%; animation-duration:15s;"></div>
+<div class="particle" style="top:30%; left:20%; animation-duration:12s;"></div>
+<div class="particle" style="top:50%; left:50%; animation-duration:18s;"></div>
+<div class="particle" style="top:70%; left:75%; animation-duration:10s;"></div>
+<div class="particle" style="top:85%; left:60%; animation-duration:14s;"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/supabase.min.js"></script>
+<script>
+const supabase = supabase.createClient(
+  'https://oukiobfulehpxeotntgi.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im91a2lvYmZ1bGVocHhlb3RudGdpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY2MjUxMTEsImV4cCI6MjA3MjIwMTExMX0.63G-x-omfwpmJR-MiJS8ohAnwHsMvlVUkTCoY1FzAz0'
+);
+
+const downloadBtn = document.getElementById('downloadBtn');
+const statusMessage = document.getElementById('statusMessage');
+
+async function checkSession() {
+    const { data: { session } } = await supabase.auth.getSession();
+    if(session && session.user) {
+        statusMessage.style.display = 'none';
+        downloadBtn.style.display = 'inline-block';
+    } else {
+        statusMessage.textContent = 'You must log in first.';
+        setTimeout(() => { window.location.href = 'auth.html'; }, 1000);
+    }
+}
+
+checkSession();
+</script>
+</body>
+</html>

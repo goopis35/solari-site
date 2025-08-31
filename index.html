@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solari</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Montserrat', sans-serif; background:#0a0a0a; color:#fff; overflow:hidden; display:flex; justify-content:center; align-items:center; height:100vh; flex-direction:column; text-align:center; }
+
+h1 { font-size:4rem; color:#FFD700; text-shadow:0 0 10px #FFD700; margin-bottom:20px; }
+p { font-size:1.5rem; color:#ccc; margin-bottom:40px; }
+
+.btn { padding:20px 60px; border-radius:12px; background:#FFD700; color:#000; font-weight:bold; font-size:1.5rem; text-decoration:none; box-shadow:0 0 5px #FFD700; transition:0.3s; cursor:pointer; }
+.btn:hover { background:#FFC700; box-shadow:0 0 15px #FFD700; }
+
+/* Particles */
+.particle { position:absolute; width:6px; height:6px; background:#FFD700; border-radius:50%; opacity:0.5; animation: float 12s linear infinite; z-index:0; }
+@keyframes float { 0% { transform: translateY(0) translateX(0); } 50% { transform: translateY(-200px) translateX(50px); } 100% { transform: translateY(0) translateX(-50px); } }
+</style>
+</head>
+<body>
+
+<h1>Solari Mod</h1>
+<p>The ultimate mining QoL mod for Skyblock.</p>
+<a id="loginBtn" class="btn">Login / Register</a>
+
+<!-- Particles -->
+<div class="particle" style="top:10%; left:5%; animation-duration:15s;"></div>
+<div class="particle" style="top:30%; left:20%; animation-duration:12s;"></div>
+<div class="particle" style="top:50%; left:50%; animation-duration:18s;"></div>
+<div class="particle" style="top:70%; left:75%; animation-duration:10s;"></div>
+<div class="particle" style="top:85%; left:60%; animation-duration:14s;"></div>
+
+<script>
+document.getElementById('loginBtn').onclick = () => {
+    window.location.href = 'auth.html';
+};
+</script>
+</body>
+</html>

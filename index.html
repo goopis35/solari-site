@@ -6,25 +6,26 @@
 <title>Solari</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'Montserrat', sans-serif; background:#0a0a0a; color:#fff; overflow:hidden; display:flex; justify-content:center; align-items:center; height:100vh; flex-direction:column; text-align:center; }
-
-h1 { font-size:4rem; color:#FFD700; text-shadow:0 0 10px #FFD700; margin-bottom:20px; }
-p { font-size:1.5rem; color:#ccc; margin-bottom:40px; }
-
-.btn { padding:20px 60px; border-radius:12px; background:#FFD700; color:#000; font-weight:bold; font-size:1.5rem; text-decoration:none; box-shadow:0 0 5px #FFD700; transition:0.3s; cursor:pointer; }
-.btn:hover { background:#FFC700; box-shadow:0 0 15px #FFD700; }
-
-/* Particles */
-.particle { position:absolute; width:6px; height:6px; background:#FFD700; border-radius:50%; opacity:0.5; animation: float 12s linear infinite; z-index:0; }
+body { margin:0; font-family:'Montserrat', sans-serif; background:#0a0a0a; color:#fff; text-align:center; overflow:hidden; display:flex; justify-content:center; align-items:center; height:100vh; flex-direction:column; }
+h1 { font-size:4rem; color:#FFD700; margin-bottom:10px; text-shadow:0 0 10px #FFD700; }
+h2 { font-size:1.8rem; color:#ccc; margin-bottom:30px; }
+button { padding:20px 60px; font-size:1.5rem; font-weight:bold; border:none; border-radius:10px; background:#FFD700; color:#000; cursor:pointer; transition:0.3s; }
+button:hover { background:#FFC700; }
+.particle { position:absolute; width:6px; height:6px; background:#FFD700; border-radius:50%; opacity:0.5; animation: float 12s linear infinite; }
+/* solari.lol top left label + discord */
+#logo { position:absolute; top:20px; left:20px; font-weight:bold; font-size:1.5rem; color:#FFD700; text-shadow:0 0 5px #FFD700; display:flex; align-items:center; gap:10px; cursor:default; }
+#discordBtn { width:24px; height:24px; cursor:pointer; filter: invert(100%); margin-top:2px; }
 @keyframes float { 0% { transform: translateY(0) translateX(0); } 50% { transform: translateY(-200px) translateX(50px); } 100% { transform: translateY(0) translateX(-50px); } }
 </style>
 </head>
 <body>
-
-<h1>Solari Mod</h1>
-<p>The ultimate mining QoL mod for Skyblock.</p>
-<a id="loginBtn" class="btn">Login / Register</a>
+<div id="logo">
+    solari.lol
+    <img id="discordBtn" src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" onclick="window.open('https://discord.gg/FAXcd5cwYr','_blank')">
+</div>
+<h1>Welcome to Solari</h1>
+<h2>The ultimate QOL mod for Hypixel Skyblock</h2>
+<button id="loginBtn">Login / Register</button>
 
 <!-- Particles -->
 <div class="particle" style="top:10%; left:5%; animation-duration:15s;"></div>

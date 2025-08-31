@@ -6,77 +6,49 @@
 <title>Login / Register - Solari</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'Montserrat', sans-serif; background:#0a0a0a; color:#fff; overflow:hidden; display:flex; justify-content:center; align-items:center; height:100vh; text-align:center; flex-direction:column; }
-h1 { font-size:3rem; color:#FFD700; margin-bottom:20px; text-shadow:0 0 10px #FFD700; }
-input { width:250px; padding:12px; margin:10px 0; border-radius:6px; border:none; background:#222; color:#fff; }
-button { width:270px; padding:15px; border:none; border-radius:8px; background:#FFD700; font-weight:bold; font-size:1.2rem; cursor:pointer; margin-top:10px; transition:0.3s; }
-button:hover { background:#FFC700; }
-#message { margin-top:15px; color:#FFD700; }
-
-/* Particles */
-.particle { position:absolute; width:6px; height:6px; background:#FFD700; border-radius:50%; opacity:0.5; animation: float 12s linear infinite; z-index:0; }
-@keyframes float { 0% { transform: translateY(0) translateX(0); } 50% { transform: translateY(-200px) translateX(50px); } 100% { transform: translateY(0) translateX(-50px); } }
+body{margin:0;font-family:'Montserrat',sans-serif;background:#0a0a0a;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;overflow:hidden;position:relative;}
+nav{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:rgba(0,0,0,0.7);z-index:100;}
+.nav-left{display:flex;align-items:center;gap:10px;}
+.nav-left div{font-weight:bold;font-size:1.5rem;color:#FFD700;text-shadow:0 0 5px #FFD700;cursor:pointer;display:flex;align-items:center;gap:10px;}
+.nav-left img{width:24px;height:24px;cursor:pointer;filter:invert(100%);}
+h1{font-size:3rem;color:#FFD700;margin-bottom:20px;text-shadow:0 0 10px #FFD700;}
+input{width:250px;padding:12px;margin:10px 0;border-radius:6px;border:none;background:#222;color:#fff;}
+button.authBtn{width:270px;padding:15px;border:none;border-radius:8px;background:#FFD700;font-weight:bold;font-size:1.2rem;cursor:pointer;margin-top:10px;transition:0.3s;}
+button.authBtn:hover{background:#FFC700;}
+#message{margin-top:15px;color:#FFD700;}
+.particle{position:absolute;width:6px;height:6px;background:#FFD700;border-radius:50%;opacity:0.5;animation:float 12s linear infinite;z-index:0;}
+@keyframes float{0%{transform:translateY(0) translateX(0);}50%{transform:translateY(-200px) translateX(50px);}100%{transform:translateY(0) translateX(-50px);}}
 </style>
 </head>
 <body>
 
+<nav>
+<div class="nav-left"><div>solari.lol</div><img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" onclick="window.open('https://discord.gg/FAXcd5cwYr','_blank')"></div>
+</nav>
+
 <h1>Login / Register</h1>
 <input type="email" id="email" placeholder="Email">
 <input type="password" id="password" placeholder="Password">
-<button id="authBtn">Login / Register</button>
+<button class="authBtn" id="authBtn">Login / Register</button>
 <p id="message"></p>
 
-<!-- Particles -->
-<div class="particle" style="top:10%; left:5%; animation-duration:15s;"></div>
-<div class="particle" style="top:30%; left:20%; animation-duration:12s;"></div>
-<div class="particle" style="top:50%; left:50%; animation-duration:18s;"></div>
-<div class="particle" style="top:70%; left:75%; animation-duration:10s;"></div>
-<div class="particle" style="top:85%; left:60%; animation-duration:14s;"></div>
+<div class="particle" style="top:10%;left:5%;animation-duration:15s;"></div>
+<div class="particle" style="top:30%;left:20%;animation-duration:12s;"></div>
+<div class="particle" style="top:50%;left:50%;animation-duration:18s;"></div>
+<div class="particle" style="top:70%;left:75%;animation-duration:10s;"></div>
+<div class="particle" style="top:85%;left:60%;animation-duration:14s;"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/supabase.min.js"></script>
-<script>
-  // ✅ Initialize Supabase with your anon key (safe for frontend)
-  const supabaseClient = supabase.createClient(
-    "https://oukiobfulehpxeotntgi.supabase.co", 
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im91a2lvYmZ1bGVocHhlb3RudGdpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY2MjUxMTEsImV4cCI6MjA3MjIwMTExMX0.63G-x-omfwpmJR-MiJS8ohAnwHsMvlVUkTCoY1FzAz0"
-  );
-
-  const emailInput = document.getElementById('email');
-  const passwordInput = document.getElementById('password');
-  const authBtn = document.getElementById('authBtn');
-  const message = document.getElementById('message');
-
-  authBtn.onclick = async () => {
-    const email = emailInput.value.trim();
-    const password = passwordInput.value.trim();
-
-    if (!email || !password) {
-      message.textContent = "⚠️ Please fill in both fields.";
-      return;
-    }
-
-    // Try to sign in
-    const { data: loginData, error: loginError } = await supabaseClient.auth.signInWithPassword({ email, password });
-
-    if (loginError) {
-      if (loginError.message.includes("Invalid login credentials")) {
-        // Try to register instead
-        const { data: signUpData, error: signUpError } = await supabaseClient.auth.signUp({ email, password });
-        if (signUpError) {
-          message.textContent = "❌ " + signUpError.message;
-        } else {
-          message.textContent = "✅ Registered successfully! Please check your email.";
-          setTimeout(() => window.location.href = "download.html", 2000);
-        }
-      } else {
-        message.textContent = "❌ " + loginError.message;
-      }
-    } else {
-      message.textContent = "✅ Logged in successfully!";
-      setTimeout(() => window.location.href = "download.html", 1000);
-    }
-  };
+<script type="module">
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+const supabase=createClient('https://oukiobfulehpxeotntgi.supabase.co','YOUR_ANON_KEY_HERE');
+async function checkSession(){const {data:{session}}=await supabase.auth.getSession();if(session&&session.user){window.location.href='home.html';}}
+checkSession();
+const emailInput=document.getElementById('email');const passwordInput=document.getElementById('password');const authBtn=document.getElementById('authBtn');const message=document.getElementById('message');
+authBtn.onclick=async()=>{const email=emailInput.value;const password=passwordInput.value;if(!email||!password){message.textContent="Please fill in both fields.";return;}
+let {data,error}=await supabase.auth.signInWithPassword({email,password});
+if(error&&error.message.includes("Invalid login credentials")){const {data:signUpData,error:signUpError}=await supabase.auth.signUp({email,password});if(signUpError){message.textContent=signUpError.message;}else{message.textContent="Registered successfully! Please check your email.";setTimeout(()=>window.location.href='home.html',2000);}}
+else if(error){message.textContent=error.message;}else{message.textContent="Logged in successfully!";setTimeout(()=>window.location.href='home.html',1000);}};
 </script>
+
 </body>
 </html>

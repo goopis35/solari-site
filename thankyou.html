@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You - Solari</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Montserrat',sans-serif;background:#0a0a0a;color:#fff;text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;overflow:hidden;}
+nav{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:rgba(0,0,0,0.7);z-index:100;}
+.nav-left{display:flex;align-items:center;gap:10px;}
+.nav-left div{font-weight:bold;font-size:1.5rem;color:#FFD700;text-shadow:0 0 5px #FFD700;cursor:pointer;display:flex;align-items:center;gap:10px;}
+.nav-left img{width:24px;height:24px;cursor:pointer;filter:invert(100%);}
+.nav-center{display:flex;gap:30px;font-weight:bold;cursor:pointer;}
+.nav-center div:hover{text-decoration:underline;}
+.nav-right button{padding:10px 30px;font-weight:bold;background:#FFD700;color:#000;border:none;border-radius:8px;cursor:pointer;transition:0.3s;}
+.nav-right button:hover{background:#FFC700;}
+h1{font-size:3rem;color:#FFD700;margin-bottom:20px;text-shadow:0 0 10px #FFD700;}
+p{font-size:1.2rem;color:#ccc;margin-bottom:30px;}
+button.mainBtn{padding:12px 30px;font-size:1rem;font-weight:bold;border:none;border-radius:8px;background:#FFD700;color:#000;cursor:pointer;transition:0.3s;}
+button.mainBtn:hover{background:#FFC700;}
+.particle{position:absolute;width:6px;height:6px;background:#FFD700;border-radius:50%;opacity:0.5;animation:float 12s linear infinite;}
+@keyframes float{0%{transform:translateY(0) translateX(0);}50%{transform:translateY(-200px) translateX(50px);}100%{transform:translateY(0) translateX(-50px);}}
+</style>
+</head>
+<body>
+<nav>
+<div class="nav-left"><div onclick="window.location.href='home.html'">solari.lol</div><img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" onclick="window.open('https://discord.gg/FAXcd5cwYr','_blank')"></div>
+<div class="nav-center"><div onclick="scrollToSection('about')">About</div><div onclick="scrollToSection('features')">Features</div></div>
+<div class="nav-right"><button onclick="window.location.href='download.html'">Download Now</button></div>
+</nav>
+
+<h1>Thank You for Downloading!</h1>
+<p>Solari is now ready to use.</p>
+<button class="mainBtn" onclick="window.location.href='home.html'">Back to Home</button>
+
+<div class="particle" style="top:10%;left:5%;animation-duration:15s;"></div>
+<div class="particle" style="top:30%;left:20%;animation-duration:12s;"></div>
+<div class="particle" style="top:50%;left:50%;animation-duration:18s;"></div>
+<div class="particle" style="top:70%;left:75%;animation-duration:10s;"></div>
+<div class="particle" style="top:85%;left:60%;animation-duration:14s;"></div>
+
+<script>
+function scrollToSection(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});}
+</script>
+</body>
+</html>

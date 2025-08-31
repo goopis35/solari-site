@@ -36,44 +36,47 @@ button:hover { background:#FFC700; }
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/supabase.min.js"></script>
 <script>
-const supabase = Supabase.createClient(
-    'https://oukiobfulehpxeotntgi.supabase.co',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im91a2lvYmZ1bGVocHhlb3RudGdpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY2MjUxMTEsImV4cCI6MjA3MjIwMTExMX0.63G-x-omfwpmJR-MiJS8ohAnwHsMvlVUkTCoY1FzAz0'
-);
+  // ✅ Initialize Supabase with your anon key (safe for frontend)
+  const supabaseClient = supabase.createClient(
+    "https://oukiobfulehpxeotntgi.supabase.co", 
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im91a2lvYmZ1bGVocHhlb3RudGdpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY2MjUxMTEsImV4cCI6MjA3MjIwMTExMX0.63G-x-omfwpmJR-MiJS8ohAnwHsMvlVUkTCoY1FzAz0"
+  );
 
-const emailInput = document.getElementById('email');
-const passwordInput = document.getElementById('password');
-const authBtn = document.getElementById('authBtn');
-const message = document.getElementById('message');
+  const emailInput = document.getElementById('email');
+  const passwordInput = document.getElementById('password');
+  const authBtn = document.getElementById('authBtn');
+  const message = document.getElementById('message');
 
-authBtn.onclick = async () => {
-    const email = emailInput.value;
-    const password = passwordInput.value;
+  authBtn.onclick = async () => {
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
 
-    if(!email || !password){
-        message.textContent = "Please fill in both fields.";
-        return;
+    if (!email || !password) {
+      message.textContent = "⚠️ Please fill in both fields.";
+      return;
     }
 
-    // Try login first
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    // Try to sign in
+    const { data: loginData, error: loginError } = await supabaseClient.auth.signInWithPassword({ email, password });
 
-    if(error && error.message.includes("Invalid login credentials")){
-        // Login failed -> register
-        const { data: signUpData, error: signUpError } = await supabase.auth.signUp({ email, password });
-        if(signUpError){
-            message.textContent = signUpError.message;
+    if (loginError) {
+      if (loginError.message.includes("Invalid login credentials")) {
+        // Try to register instead
+        const { data: signUpData, error: signUpError } = await supabaseClient.auth.signUp({ email, password });
+        if (signUpError) {
+          message.textContent = "❌ " + signUpError.message;
         } else {
-            message.textContent = "Registered successfully! Check your email to confirm.";
-            setTimeout(() => window.location.href='download.html', 2000);
+          message.textContent = "✅ Registered successfully! Please check your email.";
+          setTimeout(() => window.location.href = "download.html", 2000);
         }
-    } else if(error){
-        message.textContent = error.message;
+      } else {
+        message.textContent = "❌ " + loginError.message;
+      }
     } else {
-        message.textContent = "Logged in successfully!";
-        setTimeout(() => window.location.href='download.html', 1000);
+      message.textContent = "✅ Logged in successfully!";
+      setTimeout(() => window.location.href = "download.html", 1000);
     }
-};
+  };
 </script>
 </body>
 </html>

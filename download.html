@@ -47,7 +47,7 @@ p{color:#ccc;margin-bottom:40px;font-size:1.2rem;}
 
 <script type="module">
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
-const supabase=createClient('https://oukiobfulehpxeotntgi.supabase.co','YOUR_ANON_KEY_HERE');
+const supabase=createClient('https://aadsonfbyzrjaefvmjfc.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFhZHNvbmZieXpyamFlZnZtamZjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3MjI2NjksImV4cCI6MjA4NzI5ODY2OX0.GKFDz51cqrZu89DTyYX3C_ktCkY9ZJkqQwDRXmb0lvk');
 const downloadBtn=document.getElementById('downloadBtn');
 async function checkUser(){
     const {data:{session}}=await supabase.auth.getSession();

@@ -39,6 +39,7 @@ button.authBtn:hover{background:#FFC700;}
 <div class="particle" style="top:85%;left:60%;animation-duration:14s;"></div>
 
 <script type="module">
+  console.log("Auth script loaded");
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 const supabase=createClient('https://aadsonfbyzrjaefvmjfc.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFhZHNvbmZieXpyamFlZnZtamZjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE3MjI2NjksImV4cCI6MjA4NzI5ODY2OX0.GKFDz51cqrZu89DTyYX3C_ktCkY9ZJkqQwDRXmb0lvk');
 async function checkSession(){const {data:{session}}=await supabase.auth.getSession();if(session&&session.user){window.location.href='home.html';}}
